@@ -85,10 +85,11 @@ class TelegramBot extends \yii\base\BaseObject
 
 	public function send ($text, $to = null, bool $rawText = false)
 	{
-		$json = $this->__prepareText($text, $rawText);
-
 		$receivers = $this->__getReceivers($to);
 		$result = [];
+
+		$json = $this->__prepareText($text, $rawText);
+
 		foreach ($receivers as $chatId => $receiver)
 		{
 			$context = stream_context_create($this->contextOptions);
