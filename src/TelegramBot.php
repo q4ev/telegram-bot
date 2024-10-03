@@ -69,7 +69,7 @@ class TelegramBot extends \yii\base\BaseObject
 		return $this->_chats;
 	}
 
-	public function send ($text, ?string $to = null, bool $rawText = false)
+	public function send ($text, $to = null, bool $rawText = false)
 	{
 		$json = $this->__prepareText($text, $rawText);
 
@@ -94,7 +94,7 @@ class TelegramBot extends \yii\base\BaseObject
 		return $result;
 	}
 
-	public function sendPhoto ($filePath, ?string $to = null, ?string $caption = null)
+	public function sendPhoto ($filePath, $to = null, ?string $caption = null)
 	{
 		$result = [];
 
