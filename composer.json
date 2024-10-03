@@ -1,0 +1,27 @@
+{
+  "name": "q4ev/telegram-bot",
+  "description": "Component to send text or photo to Telegram Bot easily",
+  "homepage": "https://github.com/q4ev/telegram-bot",
+  "type": "git",
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=7.4.0",
+    "yiisoft/yii2": "*"
+  },
+  "packages": {
+    "q4ev/telegram-bot": {
+      "0.0.1": {
+        "name": "q4ev/telegram-bot",
+        "version": "0.0.1",
+        "dist": {
+          "url": "https://github.com/q4ev/telegram-bot.git",
+          "type": "vcs"
+        },
+        "require": {
+          "php": ">=7.4.0",
+          "yiisoft/yii2": "*"
+        }
+      }
+    }
+  }
+}
