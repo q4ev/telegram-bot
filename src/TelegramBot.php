@@ -18,6 +18,24 @@ class TelegramBot extends \yii\base\BaseObject
 
 	public string $url;
 
+	protected function __getReceivers ($to)
+	{
+		// in case receiver(s) omitted
+		if (!$to && $f = $this->nicknameByDefault)
+			$to = $f();
+
+		$result = [];
+		foreach ((array)$to as $nickname)
+		{
+			if (!$chatId = $this->getChat($nickname))
+				throw new InvalidArgumentException("Receiver's chat for $nickname not found");
+
+			$result[$chatId] = $nickname;
+		}
+
+		return $result;
+	}
+
 	protected function __prepareText ($text, bool $rawText = false)
 	{
 		if (null === $text)
@@ -57,10 +75,6 @@ class TelegramBot extends \yii\base\BaseObject
 		if (preg_match('/^-?\d*$/', $nickname))
 			return $nickname;
 
-		// in case nickname omitted
-		if (!$nickname && $f = $this->nicknameByDefault)
-			$nickname = $f();
-
 		return $this->_chats[$nickname] ?? null;
 	}
 
@@ -73,15 +87,13 @@ class TelegramBot extends \yii\base\BaseObject
 	{
 		$json = $this->__prepareText($text, $rawText);
 
+		$receivers = $this->__getReceivers($to);
 		$result = [];
-		foreach ((array)$to as $nickname)
+		foreach ($receivers as $chatId => $receiver)
 		{
-			if (!$chatId = $this->getChat($nickname))
-				throw new InvalidArgumentException("Receiver's chat for $nickname not found");
-
 			$context = stream_context_create($this->contextOptions);
 
-			$result[$nickname] = file_get_contents(
+			$result[$receiver] = file_get_contents(
 				$this->url."/sendMessage?chat_id=$chatId&parse_mode=html&text=$json",
 				false,
 				$context
@@ -96,6 +108,7 @@ class TelegramBot extends \yii\base\BaseObject
 
 	public function sendPhoto ($filePath, $to = null, ?string $caption = null)
 	{
+		$receivers = $this->__getReceivers($to);
 		$result = [];
 
 		$cFile = new \CURLFile($filePath);
@@ -104,7 +117,7 @@ class TelegramBot extends \yii\base\BaseObject
 		curl_setopt($ch, CURLOPT_POST, true);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-		foreach ((array)$to as $nickname)
+		foreach ($receivers as $chatId => $nickname)
 		{
 			if (!$chatId = $this->getChat($nickname))
 				throw new InvalidArgumentException("Receiver's chat for $nickname not found");
