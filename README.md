@@ -1,4 +1,4 @@
-Config file can look like this:
+Config file for this component can look like this:
 
 ```php
 return [
