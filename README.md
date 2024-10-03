@@ -9,7 +9,7 @@ return [
     'response' => [
         // your settings
     ],
-	'telegramBot' => [
+    'telegramBot' => [
         'class' => 'qaev\telegram\TelegramBot',
         // where to send
         'url' => 'https://api.telegram.org/bot000000000:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
