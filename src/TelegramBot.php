@@ -138,7 +138,7 @@ class TelegramBot extends \yii\base\BaseObject
 
 			foreach ($nicknames as $nickname)
 			{
-				if ($this->_chats[$nickname])
+				if (array_key_exists($nickname, $this->_chats))
 					throw new InvalidConfigException("Nickname '$nickname' used more than once");
 
 				$this->_chats[$nickname] = $chatId;
