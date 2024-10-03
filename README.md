@@ -3,12 +3,12 @@ Config file for this component can look like this:
 ```php
 return [
     'db' => require __DIR__ . '/db.php',
-	'request' => [
-		// your settings
-	],
-	'response' => [
-		// your settings
-	],
+    'request' => [
+        // your settings
+    ],
+    'response' => [
+        // your settings
+    ],
 	'telegramBot' => [
         'class' => 'qaev\telegram\TelegramBot',
         // where to send
