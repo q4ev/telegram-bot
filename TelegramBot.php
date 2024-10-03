@@ -1,5 +1,6 @@
 <?php
 
+namespace q4ev\telegramBot;
 
 
 use yii\base\InvalidArgumentException;
