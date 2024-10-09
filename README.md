@@ -10,7 +10,7 @@ return [
         // your settings
     ],
     'telegramBot' => [
-        'class' => 'qaev\telegram\TelegramBot',
+        'class' => 'q4ev\telegram\TelegramBot',
         // where to send
         'url' => 'https://api.telegram.org/bot000000000:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
         // where '000000000' is your bot's id
